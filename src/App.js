@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
+import { Layout, Row, Col } from 'antd';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(){
+    super();
+
+    
+  }
+
   render() {
+    const {
+        Header, Footer, Content
+      } = Layout;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+
+        <Layout>
+          <Header>Alex's Challenge</Header>
+          <Content>Content</Content>
+          <Footer>Footer</Footer>
+        </Layout>
+    
     );
   }
 }
