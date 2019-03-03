@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Layout, Input, Row, Col } from 'antd';
+import { Layout, Input, Row, Col, Button } from 'antd';
 import { Line, defaults } from 'react-chartjs-2';
+import "antd/dist/antd.css";
 import './App.css';
 
 const {
@@ -14,6 +15,7 @@ class App extends Component {
   constructor(props){
     super(props);
 
+    this.textarea = React.createRef();
     this.state = {
       data: {
         labels: ['1','2','3','4','5'], //needs to be given even of not used otherwise chart.js may crash
@@ -29,9 +31,21 @@ class App extends Component {
                  data: [14, 15, 3, 12, 1, 15]
           }
         ]
-      }
+      },
+      textInput: ''
     }
   }
+
+    componentDidMount(){
+      /*this.textarea.current.textContent = 'aaaa';
+      console.log(this.textarea.current.textContent);*/
+
+    }
+
+    onClick = event => {
+
+      console.log(this.textarea.current.textContent);
+    }
 
     getChartData = canvas => {
 
@@ -67,10 +81,10 @@ class App extends Component {
         <Layout>
           <Header>Alex's Challenge</Header>
           <Content>
-            <TextArea rows={5} style={{minHeight: "fit-content"}}/>
+            <textarea ref={this.textarea} onChange={this.onInputChange} defaultValue={'TEXT AREA'}/>
             <Line
                 options={{
-                  /*responsive: true,*/
+                  /*responsive: true,
                   /*apectRatio: 1,*/
                   /*maintainAspectRatio: true,*/
                   title: {
@@ -84,7 +98,9 @@ class App extends Component {
                 data={this.getChartData}
               />
           </Content>
-          <Footer>Footer</Footer>
+          <Footer>
+                <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
+          </Footer>
         </Layout>
     
     );
