@@ -2,7 +2,7 @@ textarea {
   width: 100%;
   /*height: -webkit-fill-available;*/
   /*max-height: 50%;*/
-  min-height: fit-content;
+  min-height: 200px;
   resize: vertical;
   overflow-y: scroll;
   background-color: black;

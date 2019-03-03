@@ -18,10 +18,10 @@ class App extends Component {
     this.textarea = React.createRef();
     this.state = {
       data: {
-        labels: ['1','2','3','4','5'], //needs to be given even of not used otherwise chart.js may crash
+        labels: ['0','1'], //needs to be given even of not used otherwise chart.js may crash
         datasets:[
           {
-                 label: "Videos Mades",
+                 label: "Videos Made",
                  backgroundColor: "rgba(255,0,255,0.75)",
                  data: [4, 5, 13, 2, 1, 15]
           },
@@ -42,9 +42,65 @@ class App extends Component {
 
     }
 
+    handleEntries = (entries) => {
+
+
+      //console.log(entries.map(entry=>JSON.parse(entry)));
+
+      let data = entries.map(entry=>{
+
+        let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
+        entry = JSON.parse(formattedEntry);
+
+        return(
+
+            {
+              label: entry.type,
+              backgroundColor: "rgba(255,0,255,0.75)",
+              data: entry.timestamp.toString().split('').map(n=>parseInt(n))
+
+            }
+
+
+          )
+
+      });
+
+      console.log(data);
+
+      this.setState(
+      {
+        data: {
+
+              datasets: data
+
+              }
+      });
+
+      
+
+
+
+      /*entries.map(entry=>{
+
+
+        let s = JSON.stringify(entry);
+        console.log(s);
+        let obj = JSON.parse(s);
+
+        return obj.type;
+
+
+      });*/
+
+    }
+
     onClick = event => {
 
-      console.log(this.textarea.current.textContent);
+      let entries = document.querySelector('textarea').value.split('\n');
+      /*console.log(JSON.parse(entries));*/
+      this.handleEntries(entries);
+      //console.log(document.querySelector('textarea').value.split('\n'));
     }
 
     getChartData = canvas => {
@@ -55,10 +111,10 @@ class App extends Component {
     canvas.style.margin = 'auto';
     /*canvas.style.marginBottom = 'auto';*/
     /*canvas.height=500;*/
-    canvas.style.maxHeight='350px';
-    canvas.style.maxWidth='650px';
-    /*canvas.style.height='auto';
-    canvas.style.width='100%';*/
+    canvas.style.padding='5%';
+
+    /*canvas.style.height='1px';
+    canvas.style.width='10%';*/
     console.log(canvas.style);
 
     let colors = ["rgba(255,0,255,0.75)","rgba(0,255,0,0.75)"];
@@ -81,7 +137,7 @@ class App extends Component {
         <Layout>
           <Header>Alex's Challenge</Header>
           <Content>
-            <textarea ref={this.textarea} onChange={this.onInputChange} defaultValue={'TEXT AREA'}/>
+            <textarea ref={this.textarea} defaultValue={'{"type": "test", "timestamp": 12345}'}/>
             <Line
                 options={{
                   /*responsive: true,
@@ -95,10 +151,11 @@ class App extends Component {
                   legend: {position: 'right'}
 
                 }}
-                data={this.getChartData}
+                //data={this.getChartData}
+                data={this.state.data}
               />
           </Content>
-          <Footer>
+          <Footer style={{zIndex: 1}}>
                 <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
           </Footer>
         </Layout>
