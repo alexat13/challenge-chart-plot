@@ -20,7 +20,6 @@
       data.datasets.forEach((set,i) => {
         set.borderWidth = 2;
         set.fill = false;
-        set.borderColor = "rgba(255,0,255,0.75)";
         set.lineTension = 0;
       });
 
@@ -37,12 +36,35 @@
     
       return <Line
                   options={{
+
                     title: {
                       display: true,
                       text: 'Chart Sample',
                       fontSize: 18
                     },
-                    legend: {position: 'right'}
+                    legend: {position: 'right'},
+
+                    scales:     {
+                xAxes: [{
+                    type:       "time",
+                    time:       {
+                        format: 'hour',
+                        tooltipFormat: 'll'
+                    },
+                    scaleLabel: {
+                        display:     true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display:     true,
+                        labelString: 'value'
+                    }
+                }]
+            }
+                  
+
                   }}
                   data={this.getChartData}
                 />

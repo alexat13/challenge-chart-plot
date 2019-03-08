@@ -1,7 +1,11 @@
   import React, { Component } from 'react';
-  import { Layout, Input, Row, Col, Button } from 'antd';
+  import { Layout, Input, Button } from 'antd';
   import { Line, defaults } from 'react-chartjs-2';
   import Chart from './Chart.js';
+  import { inputs } from './inputs.js';
+  import EventsHandler from './EventsHandler.js';
+  import { randomColor } from './randomColor.js';
+  import { randomRGB } from './randomRGB.js';
   import "antd/dist/antd.css";
   import './App.css';
 
@@ -13,83 +17,66 @@
 
   class App extends Component {
 
+
     constructor(props){
       super(props);
 
       this.textarea = React.createRef();
       this.state = {
         data: {
-          labels: ['0','1'], //needs to be given even of not used otherwise chart.js may crash
-          datasets:[
-            {
-                   label: "Videos Made",
-                   backgroundColor: "rgba(255,0,255,0.75)",
-                   data: [4, 5, 13, 2, 1, 15]
-            },
-            {
-                   label: "Subscriptions",
-                   backgroundColor: "rgba(0,255,0,0.75)",
-                   data: [14, 15, 3, 12, 1, 15]
-            }
-          ]
+
+          datasets:[]
         },
         textInput: ''
       }
     }
 
       componentDidMount(){
-        /*this.textarea.current.textContent = 'aaaa';
-        console.log(this.textarea.current.textContent);*/
+        this.handleInputs(inputs);
 
       }
 
-     /* handleChange = (event) => {
+      handleInputs = (value) => {
 
-        console.log(event.target.innerHTML);
+        
+        let entries = value.split('\n');
 
-      }*/
+        let jsonArr = entries.map(entry=>{
 
-      handleEntries = (entries) => {
-
-        let data = entries.map(entry=>{
-
-          let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
-          entry = JSON.parse(formattedEntry);
-
-          return(
-
-              {
-                label: entry.type,
-                backgroundColor: "rgba(255,0,255,0.75)",
-                data: entry.timestamp.toString().split('').map(n=>parseInt(n))
-
-              }
-
-
-            )
+            let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
+            return JSON.parse(formattedEntry);
 
         });
 
-        //console.log(data);
+        let EventsParser = new EventsHandler(jsonArr);
+
+        
+        EventsParser.showData();
+        EventsParser.processData();
+
+        //let valuesMap = EventsParser.getValues();
+
+        let datasets = EventsParser.getDatasets();
 
         this.setState(
         {
+            
           data: {
 
-                datasets: data
+                datasets: datasets
 
                 }
         });
 
-        //console.log(this.state.data);
-
       }
+
+    
 
       onClick = event => {
 
-        let entries = document.querySelector('textarea').value.split('\n');
+        let value = document.querySelector('textarea').value;
 
-        this.handleEntries(entries);
+        this.handleInputs(value);
       }
 
     render() {
@@ -97,10 +84,10 @@
       return (
 
           <Layout>
-            <Header>Alex's Challenge</Header>
-              <textarea ref={this.textarea} onChange={this.handleChange} defaultValue={`{type: 'test', timestamp: 12345}`}/>
+              <Header>Alex's Challenge</Header>
+              <textarea ref={this.textarea} onChange={this.handleChange} defaultValue={inputs}/>
               <Chart data={this.state.data}/>
-              <Footer style={{zIndex: 1}}>
+              <Footer>
                     <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
               </Footer>
           </Layout>
