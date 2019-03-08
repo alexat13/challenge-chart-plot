@@ -4,8 +4,6 @@
   import Chart from './Chart.js';
   import { inputs } from './inputs.js';
   import EventsHandler from './EventsHandler.js';
-  import { randomColor } from './randomColor.js';
-  import { randomRGB } from './randomRGB.js';
   import "antd/dist/antd.css";
   import './App.css';
 
@@ -36,25 +34,12 @@
 
       }
 
-      handleInputs = (value) => {
-
+      handleInputs = () => {
         
-        let entries = value.split('\n');
+        let inputs = document.querySelector('textarea').value;
+        let EventsParser = new EventsHandler(inputs);
 
-        let jsonArr = entries.map(entry=>{
-
-            let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
-            return JSON.parse(formattedEntry);
-
-        });
-
-        let EventsParser = new EventsHandler(jsonArr);
-
-        
-        EventsParser.showData();
         EventsParser.processData();
-
-        //let valuesMap = EventsParser.getValues();
 
         let datasets = EventsParser.getDatasets();
 
@@ -74,9 +59,8 @@
 
       onClick = event => {
 
-        let value = document.querySelector('textarea').value;
-
-        this.handleInputs(value);
+        this.handleInputs();
+        
       }
 
     render() {
