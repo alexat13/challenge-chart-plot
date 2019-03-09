@@ -35,7 +35,7 @@
       }
 
       handleInputs = () => {
-        
+
         let inputs = document.querySelector('textarea').value;
         let EventsParser = new EventsHandler(inputs);
 
@@ -45,7 +45,7 @@
 
         this.setState(
         {
-            
+
           data: {
 
                 datasets: datasets
@@ -55,16 +55,16 @@
 
       }
 
-    
+
 
       onClick = event => {
 
         this.handleInputs();
-        
+
       }
 
     render() {
-      
+
       return (
 
           <Layout>
@@ -75,7 +75,7 @@
                     <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
               </Footer>
           </Layout>
-      
+
       );
     }
   }

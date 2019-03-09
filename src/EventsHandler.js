@@ -11,6 +11,7 @@ constructor(data){
 		begin: '',
 		end: ''
 	};
+	this.streamStarted = false;
 	this.map = new Map();
 
 }
@@ -30,8 +31,12 @@ getDatasets(){
 
 this.map.forEach((v,k)=>{
 
+
+
 	const randColor1 = randomRGB();
 	const randColor2 = randomRGB();
+
+	console.log(randColor1, randColor2);
 
 	let data = {
 		data_min: [],
@@ -84,26 +89,53 @@ return this.datasets;
 
 processData(){
 
-let entries = this.data.split('\n');
-let jsonArr = entries.map(entry=>{
+	let entries = this.data.trim().split('\n');
 
-	let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
-	return JSON.parse(formattedEntry);
+	let jsonArr = [];
 
-});
+ 	entries.forEach(entry=>{
+	 if(entry.length){
+		 let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
+		 jsonArr.push(JSON.parse(formattedEntry));
+	 }
+ }
+ );
+
+// 	let jsonArr = entries.map(entry=>{
+//
+// 	let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
+// 	return JSON.parse(formattedEntry);
+//
+// });
+
+console.log(jsonArr);
+
+try{
 
 jsonArr.forEach(entry=>{
 
 	const { type } = entry;
 
 	switch(type){
+		case 'start':
+		if(this.streamStarted === false){
+				this.streamStarted = true;
+		}else{
+			throw Error("There's already an unfinished stream in progress. ")
+		}
+
+		break;
 
 		case 'span':
 		this.span =  {
 			begin: entry.begin,
 			end: entry.end
 		};
-		//console.log(this.span);
+
+		if(this.span.begin > this.span.end) throw Error("Invalid span interval. End value must be greater than begin value");
+
+
+		console.log(this.span);
 		break;
 
 		case 'data':
@@ -131,10 +163,22 @@ jsonArr.forEach(entry=>{
 							);
 		}
 		break;
+
+		case 'stop':
+		if(this.streamStarted === true){
+				this.streamStarted = false;
+		}else{
+			throw Error("There's no stream in progress to be stopped. ")
+		}
 	}
 
 
 	});
+
+}catch(err){
+
+	alert(err);
+}
 
 
 	}
