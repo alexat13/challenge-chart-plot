@@ -135,34 +135,41 @@ jsonArr.forEach(entry=>{
 		if(this.span.begin > this.span.end) throw Error("Invalid span interval. End value must be greater than begin value");
 
 
-		console.log(this.span);
+		//console.log(this.span);
 		break;
 
 		case 'data':
-		const id = `${entry.os} ${entry.browser}`;
 
-		if(this.map.has(id)){
+		if(!this.streamStarted) throw Error("No Stream in progress.");
 
-			this.map
-					.get(id)
-					.push({
-							timestamp: entry.timestamp,
-							min_response_time: entry.min_response_time,
-							max_response_time: entry.max_response_time
-						});
+		if(entry.timestamp >= this.span.begin || entry.timestamp <= this.sapan.end ){ //check if this was a requisite
 
-		}else{
+			const id = `${entry.os} ${entry.browser}`;
 
-			this.map
-					.set(`${id}`,
-								[{
-									timestamp: entry.timestamp,
-									min_response_time: entry.min_response_time,
-									max_response_time: entry.max_response_time
-								}]
-							);
+			if(this.map.has(id)){
+
+				this.map
+						.get(id)
+						.push({
+								timestamp: entry.timestamp,
+								min_response_time: entry.min_response_time,
+								max_response_time: entry.max_response_time
+							});
+
+			}else{
+
+				this.map
+						.set(`${id}`,
+									[{
+										timestamp: entry.timestamp,
+										min_response_time: entry.min_response_time,
+										max_response_time: entry.max_response_time
+									}]
+								);
+			}
+
 		}
-		break;
+				break;
 
 		case 'stop':
 		if(this.streamStarted === true){
