@@ -1,29 +1,25 @@
 import React from 'react';
-import {UnControlled as CodeMirror} from 'react-codemirror2';
-import './InputArea.css';
-require('codemirror/lib/codemirror.css');
-require('codemirror/theme/material.css');
-require('codemirror/theme/neat.css');
-require('codemirror/mode/xml/xml.js');
-require('codemirror/mode/javascript/javascript.js');
+import { render } from 'react-dom';
+import brace from 'brace';
+import AceEditor from 'react-ace';
 
+import 'brace/mode/java';
+import 'brace/theme/github';
 
 
 
 const InputArea = () => {
 
-  return <CodeMirror
-  	      className='code'
-		  value='erwerw'
-		  options={{
-		    mode: 'javascript',
-		    theme: 'material',
-		    lineNumbers: true,
-		    readOnly: false
-		  }}
-		  onChange={(editor, data, value) => {
-		  }}
-		/>
+  return(
+  <AceEditor
+    mode="java"
+    width="100%"
+    theme="github"
+    //onChange={onChange}
+    name="UNIQUE_ID_OF_DIV"
+    editorProps={{$blockScrolling: true,}}
+  />);
+
 }
 
 export default InputArea;

@@ -1,6 +1,7 @@
   import React, { Component } from 'react';
   import { Layout, Button } from 'antd';
   //import { Line, defaults } from 'react-chartjs-2';
+  import InputArea from './InputArea';
   import Chart from './Chart.js';
   import { inputs } from './inputs.js';
   import EventsHandler from './EventsHandler.js';
@@ -66,8 +67,9 @@
       return (
 
           <Layout>
-              <Header>Alex's Challenge newInput</Header>
-              <textarea onChange={this.handleChange} defaultValue={inputs}/>
+              <Header>Alex's Challenge</Header>
+              {/*<textarea onChange={this.handleChange} defaultValue={inputs}/>*/}
+              <InputArea/>
               <Chart data={this.state.data}/>
               <Footer>
                     <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
