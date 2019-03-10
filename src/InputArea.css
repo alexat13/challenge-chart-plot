@@ -1,5 +1,8 @@
-.code {
-
-	display: flex;
-	justify-content: flex-start;
+.inputarea-wrapper{
+	width: 100%;
+  resize: vertical;
+  overflow-y: scroll;
+  background-color: black;
+  color: white;
+	//max-height: 100px;
 }

@@ -2,23 +2,31 @@ import React from 'react';
 import { render } from 'react-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace';
+import './InputArea.css';
 
 import 'brace/mode/java';
-import 'brace/theme/github';
+import 'brace/theme/solarized_dark';
 
 
 
-const InputArea = () => {
+const InputArea = ({ defaultValue }) => {
+
+  //console.log(defaultValue);
 
   return(
-  <AceEditor
-    mode="java"
-    width="100%"
-    theme="github"
-    //onChange={onChange}
-    name="UNIQUE_ID_OF_DIV"
-    editorProps={{$blockScrolling: true,}}
-  />);
+  <div className='inputarea-wrapper'>
+    <AceEditor
+      mode="java"
+      width="100%"
+      theme="solarized_dark"
+      value = {defaultValue}
+      showPrintMargin={false}
+      //onChange={onChange}
+      name="UNIQUE_ID_OF_DIV"
+      editorProps={{$blockScrolling: true,}}
+    />
+  </div>
+)
 
 }
 

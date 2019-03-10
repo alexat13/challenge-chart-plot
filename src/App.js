@@ -18,7 +18,7 @@
     constructor(props){
       super(props);
 
-      //this.textarea = React.createRef();
+      this.textarea = React.createRef();
       this.state = {
         data: {
 
@@ -69,7 +69,7 @@
           <Layout>
               <Header>Alex's Challenge</Header>
               {/*<textarea onChange={this.handleChange} defaultValue={inputs}/>*/}
-              <InputArea/>
+              <InputArea defaultValue={inputs}/>
               <Chart data={this.state.data}/>
               <Footer>
                     <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
