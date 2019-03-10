@@ -18,31 +18,16 @@ constructor(data){
 
 }
 
-/*	inputData(data){
-
-this.data = data;
-this.span = {
-begin: '',
-end: ''
-};
-this.map = new Map();
-
-}*/
 selectProperties(props, entry){
 
-
-//console.log(entry);
 	const propsArr = props.map(prop=>{
-		// console.log(entry);
-		// console.log(prop);
+
 		if(entry.hasOwnProperty(prop)){
 			return entry[prop];
 		}else{
-			throw Error(`No property ${props} found on event ${entry}`);
+			throw Error(`No property ${prop} found on the following event: ${JSON.stringify(entry)}`);
 		}
 	});
-
-	//console.log(propsArr);
 
 	return propsArr.join(' ');
 
@@ -51,24 +36,20 @@ selectProperties(props, entry){
 
 getDatasets(){
 
-	//console.log(this.map);
-
-	//let ds =[];
-
-	this.map.forEach((v,k)=>{
+	this.map.forEach((data,label)=>{
 
 		const randColor = randomRGB();
 
-		let tempDataset = {
+		let dataset = {
 
-			label: k,
+			label: label,
 			backgroundColor: randColor,
 			borderColor: randColor,
-			data: v
+			data: data
 
 		};
 
-		this.datasets.push(tempDataset);
+		this.datasets.push(dataset);
 
 
 	});
@@ -89,15 +70,6 @@ processData(){
 	 }
  }
  );
-
-// 	let jsonArr = entries.map(entry=>{
-//
-// 	let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
-// 	return JSON.parse(formattedEntry);
-//
-// });
-
-//console.log(jsonArr);
 
 try{
 
@@ -126,8 +98,6 @@ jsonArr.forEach(entry=>{
 
 		if(this.span.begin > this.span.end) throw Error("Invalid span interval. End value must be greater than begin value");
 
-
-		//console.log(this.span);
 		break;
 
 		case 'data':
@@ -135,9 +105,8 @@ jsonArr.forEach(entry=>{
 		if(!this.streamStarted) throw Error("No Stream in progress.");
 
 		if(entry.timestamp >= this.span.begin && entry.timestamp <= this.span.end ){ //check if this was a requisite
-			//console.log(this.group);
+
 			const group = this.selectProperties(this.group, entry);
-			//const select = this.selectProperties(this.select, entry);
 
 			this.select.forEach(element=>{
 
@@ -180,7 +149,7 @@ jsonArr.forEach(entry=>{
 		break;
 
 		default:
-			console.log('test');
+			throw Error(`Invalid event ${JSON.stringify(entry)}.`);
 			break;
 	}
 

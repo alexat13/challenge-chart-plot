@@ -38,9 +38,9 @@
                   options={{
 
                     title: {
-                      display: true,
-                      text: 'Chart Sample',
-                      fontSize: 18
+                      display: false,
+                      //text: 'Chart',
+                      //fontSize: 18
                     },
                     legend: {position: 'right'},
 

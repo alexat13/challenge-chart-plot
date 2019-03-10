@@ -66,7 +66,7 @@
       return (
 
           <Layout>
-              <Header>Alex's Challenge</Header>
+              <Header>Alex's Challenge newInput</Header>
               <textarea onChange={this.handleChange} defaultValue={inputs}/>
               <Chart data={this.state.data}/>
               <Footer>
