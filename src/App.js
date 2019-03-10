@@ -1,6 +1,6 @@
   import React, { Component } from 'react';
-  import { Layout, Input, Button } from 'antd';
-  import { Line, defaults } from 'react-chartjs-2';
+  import { Layout, Button } from 'antd';
+  //import { Line, defaults } from 'react-chartjs-2';
   import Chart from './Chart.js';
   import { inputs } from './inputs.js';
   import EventsHandler from './EventsHandler.js';
@@ -8,10 +8,8 @@
   import './App.css';
 
   const {
-          Header, Footer, Content
+          Header, Footer
         } = Layout;
-
-  const { TextArea } = Input;
 
   class App extends Component {
 
@@ -19,7 +17,7 @@
     constructor(props){
       super(props);
 
-      this.textarea = React.createRef();
+      //this.textarea = React.createRef();
       this.state = {
         data: {
 
@@ -69,7 +67,7 @@
 
           <Layout>
               <Header>Alex's Challenge</Header>
-              <textarea ref={this.textarea} onChange={this.handleChange} defaultValue={inputs}/>
+              <textarea onChange={this.handleChange} defaultValue={inputs}/>
               <Chart data={this.state.data}/>
               <Footer>
                     <Button type="primary" onClick={this.onClick}>Generate Chart</Button>

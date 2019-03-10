@@ -1,5 +1,5 @@
   import React, { Component } from 'react';
-  import { Line, defaults } from 'react-chartjs-2';
+  import { Line } from 'react-chartjs-2';
 
   class Chart extends Component {
 
@@ -7,7 +7,7 @@
       super(props);
 
       this.textarea = React.createRef();
-      
+
     }
 
     getChartData = canvas => {
@@ -29,11 +29,11 @@
 
     componentDidMount(){
 
-      
+
     }
 
     render(){
-    
+
       return <Line
                   options={{
 
@@ -48,8 +48,8 @@
                 xAxes: [{
                     type:       "time",
                     time:       {
-                        format: 'hour',
-                        tooltipFormat: 'll'
+                        parser: 'hour'
+                        //tooltipFormat: 'll'
                     },
                     scaleLabel: {
                         display:     true,
@@ -63,7 +63,7 @@
                     }
                 }]
             }
-                  
+
 
                   }}
                   data={this.getChartData}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+//import React, { Component } from 'react';
 import { randomRGB } from './randomRGB.js';
 
 class EventHandler {
@@ -11,6 +11,8 @@ constructor(data){
 		begin: '',
 		end: ''
 	};
+	this.group = '';
+	this.select='';
 	this.streamStarted = false;
 	this.map = new Map();
 
@@ -26,63 +28,50 @@ end: ''
 this.map = new Map();
 
 }*/
+selectProperties(props, entry){
+
+
+//console.log(entry);
+	const propsArr = props.map(prop=>{
+		// console.log(entry);
+		// console.log(prop);
+		if(entry.hasOwnProperty(prop)){
+			return entry[prop];
+		}else{
+			throw Error(`No property ${props} found on event ${entry}`);
+		}
+	});
+
+	//console.log(propsArr);
+
+	return propsArr.join(' ');
+
+
+}
 
 getDatasets(){
 
-this.map.forEach((v,k)=>{
+	//console.log(this.map);
 
+	//let ds =[];
 
+	this.map.forEach((v,k)=>{
 
-	const randColor1 = randomRGB();
-	const randColor2 = randomRGB();
+		const randColor = randomRGB();
 
-	console.log(randColor1, randColor2);
+		let tempDataset = {
 
-	let data = {
-		data_min: [],
-		data_max: []
-	};
+			label: k,
+			backgroundColor: randColor,
+			borderColor: randColor,
+			data: v
 
-	v.forEach(element => {
+		};
 
-		const date = new Date(element.timestamp);
-
-		data.data_min.push({
-
-			x: date,
-			y: element.min_response_time
-
-		});
-
-		data.data_max.push({
-
-
-			x: date,
-			y: element.max_response_time
-
-		});
+		this.datasets.push(tempDataset);
 
 
 	});
-
-	let tempDataset = [{
-		label: `${k} min response time`,
-		backgroundColor: randColor1,
-		borderColor: randColor1,
-		data: data.data_min
-
-	},
-	{
-		label: `${k} max response time`,
-		backgroundColor: randColor2,
-		borderColor: randColor2,
-		data: data.data_max
-
-	}];
-
-	this.datasets.push(...tempDataset);
-
-});
 
 return this.datasets;
 }
@@ -108,18 +97,21 @@ processData(){
 //
 // });
 
-console.log(jsonArr);
+//console.log(jsonArr);
 
 try{
 
 jsonArr.forEach(entry=>{
 
-	const { type } = entry;
+	const { type, select, group } = entry;
 
 	switch(type){
 		case 'start':
+		if(!group.length) throw Error("There should be a group in the start event.");
 		if(this.streamStarted === false){
 				this.streamStarted = true;
+				this.group = group;
+				this.select = select;
 		}else{
 			throw Error("There's already an unfinished stream in progress. ")
 		}
@@ -142,31 +134,39 @@ jsonArr.forEach(entry=>{
 
 		if(!this.streamStarted) throw Error("No Stream in progress.");
 
-		if(entry.timestamp >= this.span.begin || entry.timestamp <= this.sapan.end ){ //check if this was a requisite
+		if(entry.timestamp >= this.span.begin && entry.timestamp <= this.span.end ){ //check if this was a requisite
+			//console.log(this.group);
+			const group = this.selectProperties(this.group, entry);
+			//const select = this.selectProperties(this.select, entry);
 
-			const id = `${entry.os} ${entry.browser}`;
+			this.select.forEach(element=>{
 
-			if(this.map.has(id)){
+				if(entry.hasOwnProperty(element)){
 
-				this.map
-						.get(id)
-						.push({
-								timestamp: entry.timestamp,
-								min_response_time: entry.min_response_time,
-								max_response_time: entry.max_response_time
-							});
+					const id = `${group} ${element.replace(/_/g," ")}`;
+					const axes = {
 
-			}else{
+						x: entry.timestamp,
+						y: entry[element]
 
-				this.map
-						.set(`${id}`,
-									[{
-										timestamp: entry.timestamp,
-										min_response_time: entry.min_response_time,
-										max_response_time: entry.max_response_time
-									}]
-								);
-			}
+					};
+
+					if(this.map.has(id)){
+
+						this.map
+								.get(id)
+								.push(axes);
+
+					}else{
+
+						this.map
+								.set(id,
+											[axes]
+										);
+					}
+				}
+
+			});
 
 		}
 				break;
@@ -177,6 +177,11 @@ jsonArr.forEach(entry=>{
 		}else{
 			throw Error("There's no stream in progress to be stopped. ")
 		}
+		break;
+
+		default:
+			console.log('test');
+			break;
 	}
 
 
