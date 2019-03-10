@@ -63,15 +63,17 @@ processData(){
 
 	let jsonArr = [];
 
- 	entries.forEach(entry=>{
+
+
+try{
+
+	entries.forEach(entry=>{
 	 if(entry.length){
 		 let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
 		 jsonArr.push(JSON.parse(formattedEntry));
 	 }
  }
  );
-
-try{
 
 jsonArr.forEach(entry=>{
 
@@ -104,7 +106,7 @@ jsonArr.forEach(entry=>{
 
 		if(!this.streamStarted) throw Error("No Stream in progress.");
 
-		if(entry.timestamp >= this.span.begin && entry.timestamp <= this.span.end ){ //check if this was a requisite
+		if(entry.timestamp >= this.span.begin && entry.timestamp <= this.span.end ){
 
 			const group = this.selectProperties(this.group, entry);
 

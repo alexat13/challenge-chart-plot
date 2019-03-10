@@ -36,6 +36,7 @@ textarea {
 
 .ant-layout {
   height: 100vh;
+  min-width: 600px;
 }
 
 .ant-layout-header {

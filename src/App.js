@@ -65,8 +65,6 @@
 
       onChange = (value, event) => {
 
-        console.log(value);
-
         this.setState({
           inputs: value
         });
