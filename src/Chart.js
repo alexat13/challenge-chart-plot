@@ -47,10 +47,15 @@
                     scales:     {
                 xAxes: [{
                     type:       "time",
-                    time:       {
-                        parser: 'hour'
+                    ticks: {source: "data"},
+                    //distribution: 'series',
+                    //time: {displayFormats: "hour"},
+                    //time:       {
+                        //unit: 'hour',
+                        //displayFormats: { month: 'h:mm a' },
+                        //parser: 'hour'
                         //tooltipFormat: 'll'
-                    },
+                    //},
                     scaleLabel: {
                         display:     true,
                         labelString: 'Date'

@@ -14,6 +14,11 @@ const InputArea = ({ defaultValue, onChange }) => {
   // console.log(defaultValue);
   // console.log(onChange);
 
+
+  const onMouseUp = (e) =>{
+    console.log('mouseUp');
+  }
+
   return(
     <AceEditor
       mode="java"
