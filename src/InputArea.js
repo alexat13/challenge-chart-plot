@@ -9,23 +9,23 @@ import 'brace/theme/solarized_dark';
 
 
 
-const InputArea = ({ defaultValue }) => {
+const InputArea = ({ defaultValue, onChange }) => {
 
-  //console.log(defaultValue);
+  // console.log(defaultValue);
+  // console.log(onChange);
 
   return(
-  <div className='inputarea-wrapper'>
     <AceEditor
       mode="java"
       width="100%"
       theme="solarized_dark"
       value = {defaultValue}
       showPrintMargin={false}
-      //onChange={onChange}
-      name="UNIQUE_ID_OF_DIV"
+      onChange={onChange}
+      name="inputarea"
       editorProps={{$blockScrolling: true,}}
     />
-  </div>
+
 )
 
 }
