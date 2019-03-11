@@ -1,29 +1,33 @@
 import React from 'react';
-import {UnControlled as CodeMirror} from 'react-codemirror2';
+import { render } from 'react-dom';
+import brace from 'brace';
+import AceEditor from 'react-ace';
 import './InputArea.css';
-require('codemirror/lib/codemirror.css');
-require('codemirror/theme/material.css');
-require('codemirror/theme/neat.css');
-require('codemirror/mode/xml/xml.js');
-require('codemirror/mode/javascript/javascript.js');
+
+import 'brace/mode/java';
+import 'brace/theme/solarized_dark';
 
 
 
+const InputArea = ({ defaultValue, onChange }) => {
 
-const InputArea = () => {
 
-  return <CodeMirror
-  	      className='code'
-		  value='erwerw'
-		  options={{
-		    mode: 'javascript',
-		    theme: 'material',
-		    lineNumbers: true,
-		    readOnly: false
-		  }}
-		  onChange={(editor, data, value) => {
-		  }}
-		/>
+  return(
+    <AceEditor
+      mode="java"
+      width="100%"
+      theme="solarized_dark"
+      value = {defaultValue}
+      fontSize="16px"
+      showPrintMargin={false}
+      onChange={onChange}
+      name="inputarea"
+      editorProps={{$blockScrolling: true,}}
+      style={{resize: 'vertical',overflowY: 'scroll',fontFamily: "'Source Code Pro', monospace", minHeight: '100px'}}
+    />
+
+)
+
 }
 
 export default InputArea;

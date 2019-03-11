@@ -1,8 +1,8 @@
   import React, { Component } from 'react';
   import { Layout, Button } from 'antd';
-  //import { Line, defaults } from 'react-chartjs-2';
+  import InputArea from './InputArea';
   import Chart from './Chart.js';
-  import { inputs } from './inputs.js';
+  import { defaultInputs } from './inputs.js';
   import EventsHandler from './EventsHandler.js';
   import "antd/dist/antd.css";
   import './App.css';
@@ -17,25 +17,24 @@
     constructor(props){
       super(props);
 
-      //this.textarea = React.createRef();
+      this.inputarea = React.createRef();
       this.state = {
         data: {
 
           datasets:[]
         },
-        textInput: ''
+        inputs: defaultInputs
       }
     }
 
       componentDidMount(){
-        this.handleInputs(inputs);
+        this.handleInputs(this.inputs);
 
       }
 
       handleInputs = () => {
 
-        let inputs = document.querySelector('textarea').value;
-        let EventsParser = new EventsHandler(inputs);
+        let EventsParser = new EventsHandler(this.state.inputs);
 
         EventsParser.processData();
 
@@ -61,16 +60,23 @@
 
       }
 
+      onChange = (value, event) => {
+
+        this.setState({
+          inputs: value
+        });
+      }
+
     render() {
 
       return (
 
           <Layout>
-              <Header>Alex's Challenge</Header>
-              <textarea onChange={this.handleChange} defaultValue={inputs}/>
-              <Chart data={this.state.data}/>
-              <Footer>
-                    <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
+              <Header style={{background: 'LightGray', color: '#444', fontSize: '28px'}}>Alex's Challenge</Header>
+              <InputArea defaultValue={this.state.inputs} onChange={this.onChange}/>
+              <Chart className='chart' data={this.state.data}/>
+              <Footer style={{background: 'LightGray'}}>
+                    <Button type="primary" onClick={this.onClick}>GENERATE CHART</Button>
               </Footer>
           </Layout>
 
