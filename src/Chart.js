@@ -15,7 +15,7 @@
       const data = this.props.data;
       canvas.style.margin = 'auto';
       canvas.style.maxHeight='400px';
-      canvas.style.maxWidth='800px';
+      canvas.style.maxWidth='90%';
 
       data.datasets.forEach((set,i) => {
         set.borderWidth = 2;
@@ -32,41 +32,31 @@
 
     }
 
+
     render(){
 
       return <Line
                   options={{
-
+                    maintainAspectRatio: false,
                     title: {
-                      display: true,
-                      text: 'Chart',
-                      fontSize: 18
+                      display: false
                     },
                     legend: {position: 'right'},
 
                     scales:     {
-                xAxes: [{
-                    type:       "time",
-                    ticks: {source: "data"},
-                    //distribution: 'series',
-                    //time: {displayFormats: "hour"},
-                    //time:       {
-                        //unit: 'hour',
-                        //displayFormats: { month: 'h:mm a' },
-                        //parser: 'hour'
-                        //tooltipFormat: 'll'
-                    //},
-                    scaleLabel: {
-                        display:     true,
-                        labelString: 'Date'
-                    }
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                        display:     true,
-                        labelString: 'value'
-                    }
-                }]
+                        xAxes: [{
+                            type:'time',
+                            time: {
+                              unit: 'minute',
+                              displayFormats:{
+                    					minute: 'HH:mm'
+                    				}
+                            },
+                            ticks: {
+                              source: "data", beginAtZero: true,
+                              //callback: (value, index,values) => {return this.getTicks(value,index,values)}
+                            }
+                        }]
             }
 
 

@@ -11,13 +11,6 @@ import 'brace/theme/solarized_dark';
 
 const InputArea = ({ defaultValue, onChange }) => {
 
-  // console.log(defaultValue);
-  // console.log(onChange);
-
-
-  const onMouseUp = (e) =>{
-    console.log('mouseUp');
-  }
 
   return(
     <AceEditor
@@ -25,10 +18,12 @@ const InputArea = ({ defaultValue, onChange }) => {
       width="100%"
       theme="solarized_dark"
       value = {defaultValue}
+      fontSize="16px"
       showPrintMargin={false}
       onChange={onChange}
       name="inputarea"
       editorProps={{$blockScrolling: true,}}
+      style={{resize: 'vertical',overflowY: 'scroll'}}
     />
 
 )

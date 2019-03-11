@@ -1,4 +1,3 @@
-//import React, { Component } from 'react';
 import { randomRGB } from './randomRGB.js';
 
 class EventHandler {
@@ -117,7 +116,7 @@ jsonArr.forEach(entry=>{
 					const id = `${group} ${element.replace(/_/g," ")}`;
 					const axes = {
 
-						x: entry.timestamp,
+						x: (entry.timestamp-this.span.begin)-75600000,
 						y: entry[element]
 
 					};
@@ -146,7 +145,7 @@ jsonArr.forEach(entry=>{
 		if(this.streamStarted === true){
 				this.streamStarted = false;
 		}else{
-			throw Error("There's no stream in progress to be stopped. ")
+			throw Error("No stream in progress to be stopped. ")
 		}
 		break;
 
