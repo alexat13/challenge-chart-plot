@@ -23,7 +23,7 @@ const InputArea = ({ defaultValue, onChange }) => {
       onChange={onChange}
       name="inputarea"
       editorProps={{$blockScrolling: true,}}
-      style={{resize: 'vertical',overflowY: 'scroll'}}
+      style={{resize: 'vertical',overflowY: 'scroll',fontFamily: "'Source Code Pro', monospace", minHeight: '100px'}}
     />
 
 )

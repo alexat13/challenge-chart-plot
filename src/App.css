@@ -15,10 +15,7 @@ textarea {
 	//max-height: 100px;
 }
 .input {
-  width: 100%;
-  resize: vertical;
-  background-color: black;
-  color: white;
+  min-height: 200px;
 }
 
 .chart-wrapper{
@@ -27,15 +24,14 @@ textarea {
 
 .ant-layout {
   height: 100vh;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .ant-layout-header {
-  width: 100%;
-  color: white;
+
 }
 
 .ant-layout-footer {
-  width: 100%;
-  background-color: blue;
-  flex-shrink: 0;
+
+  /* flex-shrink: 0; */
 }

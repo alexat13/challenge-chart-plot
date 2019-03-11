@@ -49,7 +49,7 @@
                             time: {
                               unit: 'minute',
                               displayFormats:{
-                    					minute: 'HH:mm'
+                    					minute: 'HH:mm:ss'
                     				}
                             },
                             ticks: {

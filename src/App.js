@@ -72,11 +72,11 @@
       return (
 
           <Layout>
-              <Header>Alex's Challenge</Header>
+              <Header style={{background: 'LightGray', color: '#444', fontSize: '28px'}}>Alex's Challenge</Header>
               <InputArea defaultValue={this.state.inputs} onChange={this.onChange}/>
-              <Chart data={this.state.data}/>
-              <Footer>
-                    <Button type="primary" onClick={this.onClick}>Generate Chart</Button>
+              <Chart className='chart' data={this.state.data}/>
+              <Footer style={{background: 'LightGray'}}>
+                    <Button type="primary" onClick={this.onClick}>GENERATE CHART</Button>
               </Footer>
           </Layout>
 
