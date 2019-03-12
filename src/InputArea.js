@@ -14,22 +14,27 @@ class InputArea extends Component{
     this.inputcontainer = React.createRef();
     this.resizer = React.createRef();
 
+    this.state = {
+      inputHeight: '100px'
+    }
+
   }
 
 
   resize = (e) => {
-    console.log('top',this.inputcontainer.current.getBoundingClientRect().top);
-    console.log('pageY',e.pageY);
-    console.log('dif',e.pageY-this.inputcontainer.current.getBoundingClientRect().top)
-
-    this.inputcontainer.current.style.height = e.pageY - (this.inputcontainer.current.getBoundingClientRect().top) + 'px';
+    // console.log('top',this.inputcontainer.current.getBoundingClientRect().top);
+    // console.log('pageY',e.pageY);
+    // console.log('dif',e.pageY-this.inputcontainer.current.getBoundingClientRect().top)
+    const newHeight = e.pageY - (this.inputcontainer.current.getBoundingClientRect().top) + 'px';
+    this.setState({inputHeight: newHeight });
+    //this.inputcontainer.current.style.height = e.pageY - (this.inputcontainer.current.getBoundingClientRect().top) + 'px';
     //this.inputcontainer.current.style.height = '300px';
     //console.log(this.inputcontainer.current.style)
     //console.log(this.inputpanel.style);
   }
 
   stopResize = (e) =>{
-    this.body.removeEventListener('mousemove', this.resize);
+    window.removeEventListener('mousemove', this.resize);
     console.log('removed');
   }
 
@@ -43,8 +48,8 @@ componentDidMount(){
   console.log(this.body);
   //
   this.resizer.current.addEventListener('mousedown', (e)=>{
-    this.body.addEventListener('mousemove',this.resize);
-    this.body.addEventListener('mouseup',this.stopResize);
+    window.addEventListener('mousemove',this.resize);
+    window.addEventListener('mouseup',this.stopResize);
     //this.resizer.current.addEventListener('mousemove',this.resize);
   });
 
@@ -53,9 +58,23 @@ componentDidMount(){
 render(){
 
   return(
-    <div>
-      <div className='test' ref={this.inputcontainer}></div>
-      <div className='resizer' ref={this.resizer}></div>
+    <div className="inputcontainer" ref={this.inputcontainer}>
+    <AceEditor
+      mode="java"
+      width="100%"
+      height={this.state.inputHeight}
+      theme="solarized_dark"
+      showPrintMargin = {false}
+			wrapEnabled     = {true}
+      value = {this.props.values}
+      fontSize="16px"
+      showPrintMargin={false}
+      onChange={this.props.onChange}
+      name="inputarea"
+      editorProps={{$blockScrolling: true,}}
+      style={{fontFamily: "'Source Code Pro', monospace", minHeight: "100px"}}
+    />
+    <div className='resizer' ref={this.resizer}></div>
     </div>
 
   )

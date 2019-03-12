@@ -6,7 +6,8 @@
 
 }
 .inputcontainer{
-/* position: absolute; */
+  z-index: 99;
+position: relative;
   /* min-height: 100px;
   resize: vertical;*/
   /* overflowY: scroll; */
@@ -14,10 +15,14 @@
   /* border-color: green; */
 }
 .resizer {
-  /* bottom: -5px; */
-  /* background-color: blue; */
+  position: relative;
+  top: -5px;
+  background-color: blue;
   /* height:5px; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 20px;
   cursor: row-resize;
-  border-bottom: 5px solid red;
+  border: 5px solid red;
 
 }
