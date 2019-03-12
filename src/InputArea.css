@@ -6,7 +6,7 @@
 
 }
 .inputcontainer{
-  z-index: 99;
+
 position: relative;
   /* min-height: 100px;
   resize: vertical;*/
@@ -16,13 +16,16 @@ position: relative;
 }
 .resizer {
   position: relative;
-  top: -5px;
+  top: -9px;
   background-color: blue;
   /* height:5px; */
   margin-left: auto;
   margin-right: auto;
-  width: 20px;
+  width: 40px;
+  height: 16px;
   cursor: row-resize;
-  border: 5px solid red;
+  border: 2px solid red;
+  border-radius: 5px;
+  z-index: 99;
 
 }
