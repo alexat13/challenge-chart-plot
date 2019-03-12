@@ -1,5 +1,6 @@
   import React, { Component } from 'react';
   import { Line } from 'react-chartjs-2';
+  import './Chartjs.css';
 
   class Chart extends Component {
 
@@ -35,7 +36,9 @@
 
     render(){
 
-      return <Line
+      return(
+        //<div>
+        <Line
                   options={{
                     maintainAspectRatio: false,
                     title: {
@@ -63,6 +66,8 @@
                   }}
                   data={this.getChartData}
                 />
+                //</div>
+              )
     }
   }
 

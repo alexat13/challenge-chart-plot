@@ -26,6 +26,7 @@ class InputArea extends Component{
     // console.log('pageY',e.pageY);
     // console.log('dif',e.pageY-this.inputcontainer.current.getBoundingClientRect().top)
     const newHeight = e.pageY - (this.inputcontainer.current.getBoundingClientRect().top) + 'px';
+
     this.setState({inputHeight: newHeight });
     //this.inputcontainer.current.style.height = e.pageY - (this.inputcontainer.current.getBoundingClientRect().top) + 'px';
     //this.inputcontainer.current.style.height = '300px';
