@@ -1,0 +1,15 @@
+
+.inputcontainer{
+
+  /* min-height: 100px;
+  resize: vertical;*/
+  /* overflowY: scroll; */
+  /* border-bottom: solid; */
+  /* border-color: green; */
+}
+.resizer {
+  /* bottom: -5px; */
+  background-color: green;
+  height:3px;
+  cursor: row-resize;
+}

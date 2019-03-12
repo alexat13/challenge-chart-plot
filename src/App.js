@@ -73,7 +73,7 @@
 
           <Layout>
               <Header style={{background: 'LightGray', color: '#444', fontSize: '28px'}}>Alex's Challenge</Header>
-              <InputArea defaultValue={this.state.inputs} onChange={this.onChange}/>
+              <InputArea values={this.state.inputs} onChange={this.onChange}/>
               <Chart className='chart' data={this.state.data}/>
               <Footer style={{background: 'LightGray'}}>
                     <Button type="primary" onClick={this.onClick}>GENERATE CHART</Button>
