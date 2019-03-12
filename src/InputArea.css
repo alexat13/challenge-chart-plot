@@ -1,6 +1,12 @@
+.test{
+  width: 100%;
+  height: 200px;
+  background-color: green;
+  z-index: 99;
 
+}
 .inputcontainer{
-
+/* position: absolute; */
   /* min-height: 100px;
   resize: vertical;*/
   /* overflowY: scroll; */
@@ -9,7 +15,9 @@
 }
 .resizer {
   /* bottom: -5px; */
-  background-color: green;
-  height:3px;
+  /* background-color: blue; */
+  /* height:5px; */
   cursor: row-resize;
+  border-bottom: 5px solid red;
+
 }
