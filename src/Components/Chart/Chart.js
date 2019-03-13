@@ -1,3 +1,7 @@
+    /*This component that renders the line chart
+*  with the series of events
+*/
+
     import React, { Component } from 'react';
     import { Line } from 'react-chartjs-2';
     import './Chartjs.css';
@@ -11,6 +15,9 @@
 
       }
 
+      /*Fuction that is called back from the chartjs lib
+      *so that we can modify the canvas properties
+      */
       getChartData = canvas => {
 
         const data = this.props.data;
@@ -25,11 +32,6 @@
         });
 
         return data;
-
-      }
-
-      componentDidMount(){
-
 
       }
 

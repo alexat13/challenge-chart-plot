@@ -1,6 +1,6 @@
 
 
-/*This is the component that renders the input field
+/*This is renders the input field
 *  wrapped in a resizable div
 */
 
@@ -51,6 +51,10 @@ componentDidMount(){
 
 }
 
+/*Rendering the chart component with the data and
+*the function that deals with changes on the input
+*area as props, as well as other configs.
+*/
 render(){
   const { values, onChange} = this.props;
   return(

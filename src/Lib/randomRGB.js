@@ -1,3 +1,5 @@
+/*Returns a random RGB value.*/
+
 export const randomRGB = () => {
 
 	const randomValue = () => {

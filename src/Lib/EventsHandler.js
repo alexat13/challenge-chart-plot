@@ -68,6 +68,9 @@ an array of events*/
 
 processData(){
 
+	/*Gets the inputs from the input and splits them
+	*into an array
+	*/
 	let entries = this.data.trim().split('\n');
 
 	let jsonArr = [];
@@ -76,6 +79,10 @@ processData(){
 
 try{
 
+	/*Each entry in the entries array is formatted into a valid
+	*JSON format, so that it can be parsed
+	*/
+
 	entries.forEach(entry=>{
 	 if(entry.length){
 		 let formattedEntry = entry.replace(/(['"])?((([0-9]+)?[a-zA-Z_]+([0-9]+)?)+(\2?)|(['"][0-9]+))(['"])?/g,'"$2"');
@@ -83,6 +90,9 @@ try{
 	 }
  }
  );
+	/*Each entry, which contains a valid event, is analyzed by
+	*its type. 
+	*/
 
 jsonArr.forEach(entry=>{
 

@@ -2,9 +2,11 @@
   "name": "challenge",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://alexat13.github.io/challenge-chart-plot",
   "dependencies": {
     "antd": "^3.13.6",
     "chart.js": "^2.7.3",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.3",
     "react-ace": "^6.4.0",
     "react-chartjs-2": "^2.7.4",
@@ -12,6 +14,8 @@
     "react-scripts": "2.1.5"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
