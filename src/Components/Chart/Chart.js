@@ -1,4 +1,4 @@
-    /*This component that renders the line chart
+    /*This component renders the line chart
 *  with the series of events
 */
 
@@ -22,7 +22,7 @@
 
         const data = this.props.data;
         canvas.style.margin = 'auto';
-        canvas.style.maxHeight='400px';
+        canvas.style.maxHeight='350px';
         canvas.style.maxWidth='90%';
 
         data.datasets.forEach((set,i) => {

@@ -1,5 +1,4 @@
 
-
 /*This is renders the input field
 *  wrapped in a resizable div
 */
@@ -38,7 +37,6 @@ class InputArea extends Component{
   /*Stops resizing*/
   stopResize = (e) =>{
     window.removeEventListener('mousemove', this.resize);
-    console.log('removed');
   }
 
 /*Adding the event listeners for the resing process*/
