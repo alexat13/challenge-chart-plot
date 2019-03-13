@@ -65,7 +65,7 @@ return this.datasets;
 a valid JSON, and starts the process of analyzing the events by looping through
 an array of events*/
 
-}
+
 processData(){
 
 	let entries = this.data.trim().split('\n');
