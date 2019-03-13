@@ -1,3 +1,6 @@
+/*This class is responsible for handling events, which are
+a set of key and values*/
+
 import { randomRGB } from './randomRGB.js';
 
 class EventHandler {
@@ -17,7 +20,8 @@ constructor(data){
 
 }
 
-selectProperties(props, entry){
+/*Selects the properties of the group in the start*/
+selectGroup(props, entry){
 
 	const propsArr = props.map(prop=>{
 
@@ -33,6 +37,7 @@ selectProperties(props, entry){
 
 }
 
+/*Sets some parameters for each dataset and returs them*/
 getDatasets(){
 
 	this.map.forEach((data,label)=>{
@@ -56,6 +61,11 @@ getDatasets(){
 return this.datasets;
 }
 
+/*This is the function that handles all the inputs, converting the JSON input into
+a valid JSON, and starts the process of analyzing the events by looping through
+an array of events*/
+
+}
 processData(){
 
 	let entries = this.data.trim().split('\n');
@@ -107,7 +117,7 @@ jsonArr.forEach(entry=>{
 
 		if(entry.timestamp >= this.span.begin && entry.timestamp <= this.span.end ){
 
-			const group = this.selectProperties(this.group, entry);
+			const group = this.selectGroup(this.group, entry);
 
 			this.select.forEach(element=>{
 
@@ -149,9 +159,9 @@ jsonArr.forEach(entry=>{
 		}
 		break;
 
-		default:
-			throw Error(`Invalid event ${JSON.stringify(entry)}.`);
-			break;
+		 default:
+		 	throw Error(`Invalid event ${JSON.stringify(entry)}.`);
+		 break;
 	}
 
 

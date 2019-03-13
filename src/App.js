@@ -1,9 +1,9 @@
   import React, { Component } from 'react';
   import { Layout, Button } from 'antd';
-  import InputArea from './InputArea';
-  import Chart from './Chart.js';
-  import { defaultInputs } from './inputs.js';
-  import EventsHandler from './EventsHandler.js';
+  import InputArea from './Components/InputArea/InputArea.js';
+  import Chart from './Components/Chart/Chart.js';
+  import { defaultInputs } from './Util/inputs.js';
+  import EventsHandler from './Lib/EventsHandler.js';
   import "antd/dist/antd.css";
   import './App.css';
 
