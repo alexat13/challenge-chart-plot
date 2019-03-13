@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/challenge-chart-plot/static/js/runtime~main.2e3e5999.js"
   },
   {
-    "revision": "ca5b129b9d4a3445e468",
-    "url": "/challenge-chart-plot/static/js/main.ca5b129b.chunk.js"
+    "revision": "058ee3bd5526207250d7",
+    "url": "/challenge-chart-plot/static/js/main.058ee3bd.chunk.js"
   },
   {
     "revision": "6781aaac192a0ec5e06f",
     "url": "/challenge-chart-plot/static/js/2.6781aaac.chunk.js"
   },
   {
-    "revision": "ca5b129b9d4a3445e468",
+    "revision": "058ee3bd5526207250d7",
     "url": "/challenge-chart-plot/static/css/main.67d6a5cb.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/challenge-chart-plot/static/css/2.c7cb8a47.chunk.css"
   },
   {
-    "revision": "83c9ff366ed9f82b63739309e5c2142c",
+    "revision": "d532fa50981ed2e385f27121868aa6b9",
     "url": "/challenge-chart-plot/index.html"
   }
 ];
